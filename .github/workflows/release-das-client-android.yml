@@ -25,6 +25,7 @@ jobs:
         working-directory: das_client
 
     steps:
+      - uses: actions/checkout@v4
       - name: bashCmd
         shell: bash
         run: |
