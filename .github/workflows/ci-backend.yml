@@ -23,7 +23,12 @@ on:
     branches: [ "main" ]
 
 jobs:
-  random:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo CI das_backend
+      - uses: actions/checkout@v4
+      - name: bashCmd
+        shell: bash
+        run: |
+          echo "GH_REPO: $GH_REPO"
+          echo "CI backend"

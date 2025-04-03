@@ -26,5 +26,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - run: echo "Created DAS iOS CLient release"
+      - name: bashCmd
+        shell: bash
+        run: |
+          echo "GH_REPO: $GH_REPO"
+          echo "release ios"

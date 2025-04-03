@@ -30,4 +30,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Testing client on Browserstack"
+      - uses: actions/checkout@v4
+      - name: bashCmd
+        shell: bash
+        run: |
+          echo "GH_REPO: $GH_REPO"
+          echo "BrowserStack run iOS"
