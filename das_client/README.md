@@ -3,7 +3,7 @@
 DAS (Driver Advisory System) is a mobile application that provides all the required journey data to the train driver.
 
 Big feature change! Second Feature.
-thrid feature
+thrid feature - some thing that was forgotten
 
 ## Supported platforms
 
