@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.17.1](https://github.com/smallTrogdor/DAS/compare/das_client-v0.17.0...das_client-v0.17.1) (2025-04-04)
+
+
+### Bug Fixes
+
+* small fix ([#8](https://github.com/smallTrogdor/DAS/issues/8)) ([ddca1b6](https://github.com/smallTrogdor/DAS/commit/ddca1b611c15175f9a563bf2225a7ba6f75dd6d3))
+
 ## [0.17.0](https://github.com/smallTrogdor/DAS/compare/das_client-v0.16.0...das_client-v0.17.0) (2025-04-04)
 
 
