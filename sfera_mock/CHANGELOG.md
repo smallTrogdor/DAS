@@ -1,5 +1,48 @@
 # Changelog
 
+## [0.4.0](https://github.com/smallTrogdor/DAS/compare/sfera_mock-v0.3.0...sfera_mock-v0.4.0) (2025-04-04)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to SFERA v3 ([#578](https://github.com/smallTrogdor/DAS/issues/578)) (#577)
+
+### Features
+
+* add RADN footnotes ([#625](https://github.com/smallTrogdor/DAS/issues/625)) ([#762](https://github.com/smallTrogdor/DAS/issues/762)) ([3c4324f](https://github.com/smallTrogdor/DAS/commit/3c4324f13b0c2c5f79fab687f55cbffa152d18f7))
+* added communication network change. ([#372](https://github.com/smallTrogdor/DAS/issues/372)) ([#658](https://github.com/smallTrogdor/DAS/issues/658)) ([a0ef624](https://github.com/smallTrogdor/DAS/commit/a0ef62444b73ca30bfc3f85b94d34ba13bc527ad))
+* added koa notification ([#624](https://github.com/smallTrogdor/DAS/issues/624)) ([#688](https://github.com/smallTrogdor/DAS/issues/688)) ([164b557](https://github.com/smallTrogdor/DAS/commit/164b557ac3f824af3a1d77ce516f7c42847b9e67))
+* added reduced journey overview ([#626](https://github.com/smallTrogdor/DAS/issues/626)) ([#691](https://github.com/smallTrogdor/DAS/issues/691)) ([49adc47](https://github.com/smallTrogdor/DAS/commit/49adc475b0bedfabf07730523145fcc69c91f369))
+* curves and km-board without speed data ([#478](https://github.com/smallTrogdor/DAS/issues/478)) ([#656](https://github.com/smallTrogdor/DAS/issues/656)) ([2020764](https://github.com/smallTrogdor/DAS/commit/2020764a51185a7de8a550a372ec16365422ef07))
+* dynamic timestamps in JP ([#512](https://github.com/smallTrogdor/DAS/issues/512)) ([#664](https://github.com/smallTrogdor/DAS/issues/664)) ([8d19230](https://github.com/smallTrogdor/DAS/commit/8d19230f989d53ae835da85bfb5a306ec86f5694))
+* hide line speed and ASR above 40km/h on ETCS L2 segment. ([#120](https://github.com/smallTrogdor/DAS/issues/120)) ([#586](https://github.com/smallTrogdor/DAS/issues/586)) ([e197542](https://github.com/smallTrogdor/DAS/commit/e197542142c262455b9b45159d5288816974c2c2))
+* implement session termination. ([#406](https://github.com/smallTrogdor/DAS/issues/406)) ([#628](https://github.com/smallTrogdor/DAS/issues/628)) ([4d0239d](https://github.com/smallTrogdor/DAS/commit/4d0239d74c8681a8058220c9daf119f12c46eaba))
+* manual triggers ([#622](https://github.com/smallTrogdor/DAS/issues/622)) ([#650](https://github.com/smallTrogdor/DAS/issues/650)) ([87e4811](https://github.com/smallTrogdor/DAS/commit/87e48115803e36542bbdd2329de6c709a38415db))
+* upgrade to SFERA v3 ([#578](https://github.com/smallTrogdor/DAS/issues/578)) ([#577](https://github.com/smallTrogdor/DAS/issues/577)) ([df1d74c](https://github.com/smallTrogdor/DAS/commit/df1d74c614f8ca16d1abbef9e9a52c55e3a3f689))
+
+
+### Bug Fixes
+
+* **deps:** update dependency org.springframework.boot:spring-boot-starter-parent to v3.4.4 ([#736](https://github.com/smallTrogdor/DAS/issues/736)) ([d47ad4b](https://github.com/smallTrogdor/DAS/commit/d47ad4b5d8b3083ad1600bbe56210a782a70ad55))
+* **deps:** update dependency org.springframework.cloud:spring-cloud-dependencies to v2024.0.1 ([#719](https://github.com/smallTrogdor/DAS/issues/719)) ([293f6f3](https://github.com/smallTrogdor/DAS/commit/293f6f35e8a9f7ae4a14fb738bf6ddd31ac43d71))
+* footnotes ([4b814d8](https://github.com/smallTrogdor/DAS/commit/4b814d8093be877c2210bbed9270f32826f3b3a0))
+* mock train 1809 path ([77d30fa](https://github.com/smallTrogdor/DAS/commit/77d30fa56d6924dfd8a2d89507abacf90b4943bf))
+* review of SFERA API ([#751](https://github.com/smallTrogdor/DAS/issues/751)) ([b2e005f](https://github.com/smallTrogdor/DAS/commit/b2e005f007c1b3f896b5a094e2b2446ee187bacc))
+* **sfera_mock:** update dependency org.springframework.boot:spring-boot-starter-parent to v3.4.3 ([#607](https://github.com/smallTrogdor/DAS/issues/607)) ([4709922](https://github.com/smallTrogdor/DAS/commit/4709922c213be3e2f4e65cf5b57ba1d558ef92e2))
+
+
+### Documentation
+
+* 1671 and 1672 remove fake signals ([#745](https://github.com/smallTrogdor/DAS/issues/745)) ([8b82a95](https://github.com/smallTrogdor/DAS/commit/8b82a950b86c5f6e3317caefaeaf261acc27a5ca))
+* 1809 add velocities ([#711](https://github.com/smallTrogdor/DAS/issues/711)) ([986fe40](https://github.com/smallTrogdor/DAS/commit/986fe403a5ab1f7a060aa026bb83fc454c236750))
+* 1809 fix foot notes add events ([#776](https://github.com/smallTrogdor/DAS/issues/776)) ([bd7c850](https://github.com/smallTrogdor/DAS/commit/bd7c85074a1dfe3da453e20268654114dd9d7d8a))
+* fix 1671 and add 1670 & 1672 ([#675](https://github.com/smallTrogdor/DAS/issues/675)) ([caecafd](https://github.com/smallTrogdor/DAS/commit/caecafddbdd5e9f292a356fb7d3061013b728ddb))
+* fix 1672 and 1671 ([#718](https://github.com/smallTrogdor/DAS/issues/718)) ([8e6b97f](https://github.com/smallTrogdor/DAS/commit/8e6b97f62dc70fd6f77038a7ceb0de094a0881a8))
+* fix 1809 ([#618](https://github.com/smallTrogdor/DAS/issues/618)) ([d9b3936](https://github.com/smallTrogdor/DAS/commit/d9b39361035de2d893a224e5ec85abdf23a076b8))
+* fix 1809 version number ([#619](https://github.com/smallTrogdor/DAS/issues/619)) ([81d7c98](https://github.com/smallTrogdor/DAS/commit/81d7c984e7e02a47e20fa8abb91094662ed07e2a))
+* monorepo structure and docs ([#585](https://github.com/smallTrogdor/DAS/issues/585)) ([4e0b70f](https://github.com/smallTrogdor/DAS/commit/4e0b70f93280618ed3abea084c1ada40c7f15c08))
+* testdata for UX tests ([#669](https://github.com/smallTrogdor/DAS/issues/669)) ([c018e5a](https://github.com/smallTrogdor/DAS/commit/c018e5a19c7db0d3da350e58aa99429f203ad479))
+
 ## [0.3.0](https://github.com/SchweizerischeBundesbahnen/DAS/compare/sfera_mock-v0.2.2...sfera_mock-v0.3.0) (2025-03-25)
 
 
