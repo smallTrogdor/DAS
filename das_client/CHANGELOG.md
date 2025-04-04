@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.17.2](https://github.com/smallTrogdor/DAS/compare/das_client-v0.17.1...das_client-v0.17.2) (2025-04-04)
+
+
+### Bug Fixes
+
+* reusable workflow ([#10](https://github.com/smallTrogdor/DAS/issues/10)) ([e9614c6](https://github.com/smallTrogdor/DAS/commit/e9614c6a8e612d2524f6a745bb36133e72238c12))
+
 ## [0.17.1](https://github.com/smallTrogdor/DAS/compare/das_client-v0.17.0...das_client-v0.17.1) (2025-04-04)
 
 
