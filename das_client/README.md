@@ -4,6 +4,7 @@ DAS (Driver Advisory System) is a mobile application that provides all the requi
 
 Big feature change! Second Feature.
 thrid feature - some thing that was forgotten
+first fix
 
 ## Supported platforms
 
