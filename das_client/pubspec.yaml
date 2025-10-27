@@ -16,8 +16,6 @@ workspace:
   - settings
   - connectivity_x
   - local_regulations
-  # only for CI check
-  - tool/tool_sfera_validator
 
 dev_dependencies:
   melos: ^7.2.0
@@ -62,7 +60,6 @@ melos:
         failFast: false
       packageFilters:
         dirExists: test
-        ignore: "*tool*"
 
     coverage:
       run: flutter test --coverage --no-pub
@@ -71,7 +68,6 @@ melos:
         failFast: false
       packageFilters:
         dirExists: test
-        ignore: "*tool*"
 
   command:
     clean:
