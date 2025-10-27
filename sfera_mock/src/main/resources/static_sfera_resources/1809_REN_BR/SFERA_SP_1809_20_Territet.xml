@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <SegmentProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 xsi:noNamespaceSchemaLocation="../../SFERA_v3.00.xsd"
-                SP_ID="1809_20_Territet" SP_VersionMajor="2" SP_VersionMinor="1" SP_Length="1100" SP_Status="Valid">
+                SP_ID="1809_20_Territet" SP_VersionMajor="2" SP_VersionMinor="2" SP_Length="1100" SP_Status="Valid">
     <SP_Zone>
         <IM_ID>1285</IM_ID>
     </SP_Zone>
@@ -25,7 +25,6 @@
                 <teltsi_LocationPrimaryCode>1309</teltsi_LocationPrimaryCode>
                 <teltsi_PrimaryLocationName>Territet</teltsi_PrimaryLocationName>
             </TAF_TAP_LocationIdent>
-            <TAF_TAP_LocationName language="de" text="Territet"/>
 
             <TAF_TAP_Location_NSP>
                 <teltsi_Company>0085</teltsi_Company>
@@ -82,6 +81,9 @@
 
         <DecisiveGradientArea startEndQualifier="StartsEnds" startLocation="0" endLocation="0" gradientValue="9.0" gradientDirection="Downhill"
                               directionOfApplicationOnSP="Nominal"/>
+        <DecisiveGradientArea startEndQualifier="StartsEnds" startLocation="0" endLocation="0"
+                              gradientValue="0.0" gradientDirection="Uphill"
+                              directionOfApplicationOnSP="Nominal"/> 
 
 
     </SP_ContextInformation>

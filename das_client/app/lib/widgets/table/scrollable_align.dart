@@ -1,0 +1,129 @@
+import 'dart:math';
+
+import 'package:app/util/widget_util.dart';
+import 'package:app/widgets/stickyheader/sticky_header.dart';
+import 'package:app/widgets/stickyheader/sticky_level.dart';
+import 'package:app/widgets/table/das_table_row.dart';
+import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
+
+final _log = Logger('ScrollableAlign');
+
+class ScrollableAlign extends StatefulWidget {
+  static const Duration alignScrollDuration = Duration(milliseconds: 300);
+
+  const ScrollableAlign({required this.rows, required this.scrollController, required this.child, super.key});
+
+  final Widget child;
+  final List<DASTableRow> rows;
+  final ScrollController scrollController;
+
+  @override
+  State<ScrollableAlign> createState() => _ScrollableAlignState();
+}
+
+class _ScrollableAlignState extends State<ScrollableAlign> {
+  final GlobalKey key = GlobalKey();
+  bool isTouching = false;
+  bool isAnimating = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Listener(
+      key: key,
+      onPointerDown: (_) => isTouching = true,
+      onPointerUp: (_) => isTouching = false,
+      child: NotificationListener<ScrollEndNotification>(
+        onNotification: (_) {
+          if (!isTouching && !isAnimating) {
+            // Delay scroll back by 1 Frame to avoid strange behaviour
+            Future.delayed(Duration(milliseconds: 1), () => _alignToElement());
+          }
+
+          return false;
+        },
+        child: widget.child,
+      ),
+    );
+  }
+
+  void _alignToElement() async {
+    if (!mounted) return;
+
+    final widgetOffset = WidgetUtil.findOffsetOfKey(key);
+    final stickyHeaderState = StickyHeader.of(context);
+
+    if (widget.scrollController.positions.isEmpty || widgetOffset == null) {
+      return;
+    }
+
+    var stickyHeaderHeight = 0.0;
+    var stickyHeaderOffset = 0.0;
+    var stickyHeader2Offset = 0.0;
+    if (stickyHeaderState != null) {
+      final headerIndexes = stickyHeaderState.controller.headerIndexes;
+
+      if (headerIndexes[StickyLevel.first] != -1) {
+        stickyHeaderHeight += widget.rows[headerIndexes[StickyLevel.first]!].height;
+        stickyHeaderOffset = stickyHeaderState.controller.headerOffsets[StickyLevel.first]!.abs();
+      }
+
+      if (headerIndexes[StickyLevel.second] != -1) {
+        final rowHeight = widget.rows[headerIndexes[StickyLevel.second]!].height;
+        final stickyOffset = stickyHeaderState.controller.headerOffsets[StickyLevel.second]!.abs();
+        if (rowHeight >= stickyOffset) {
+          stickyHeader2Offset = min(stickyOffset, rowHeight);
+          stickyHeaderHeight += rowHeight - stickyOffset;
+        }
+      }
+
+      stickyHeaderHeight = stickyHeaderHeight.roundToDouble();
+    }
+
+    final currentPosition = widget.scrollController.position.pixels;
+
+    if (stickyHeader2Offset > 0) {
+      _scrollToTarget((currentPosition - stickyHeader2Offset).roundToDouble());
+      return;
+    }
+
+    if (stickyHeaderOffset > 0) {
+      _scrollToTarget((currentPosition - stickyHeaderOffset).roundToDouble());
+      return;
+    }
+
+    for (final row in widget.rows) {
+      if (row.key.currentContext != null) {
+        final renderObject = row.key.currentContext?.findRenderObject() as RenderBox?;
+        if (renderObject != null) {
+          final offset = renderObject.localToGlobal(Offset.zero) - widgetOffset;
+          final visibleArea = offset.dy + row.height - stickyHeaderHeight;
+
+          if (visibleArea == row.height) {
+            break;
+          }
+
+          if (visibleArea > 0) {
+            _scrollToTarget((currentPosition - (row.height - visibleArea)).roundToDouble());
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  Future<void> _scrollToTarget(double targetPosition) async {
+    if (widget.scrollController.position.pixels != targetPosition) {
+      _log.fine(
+        'Scrolling to targetPosition=$targetPosition, currentPosition=${widget.scrollController.position.pixels}',
+      );
+      isAnimating = true;
+      await widget.scrollController.animateTo(
+        targetPosition,
+        duration: ScrollableAlign.alignScrollDuration,
+        curve: Curves.easeInOut,
+      );
+      isAnimating = false;
+    }
+  }
+}

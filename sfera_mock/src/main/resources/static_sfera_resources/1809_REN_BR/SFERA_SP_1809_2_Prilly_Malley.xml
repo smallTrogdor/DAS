@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <SegmentProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../SFERA_v3.00.xsd" SP_ID="1809_2_Prilly_Malley"
-                SP_VersionMajor="2" SP_VersionMinor="0" SP_Length="2300" SP_Status="Valid">
+                SP_VersionMajor="2" SP_VersionMinor="2" SP_Length="2300" SP_Status="Valid">
     <SP_Zone>
         <IM_ID>1285</IM_ID>
     </SP_Zone>
@@ -49,7 +49,6 @@
                 <teltsi_LocationPrimaryCode>18452</teltsi_LocationPrimaryCode>
                 <teltsi_PrimaryLocationName>Prilly Malley</teltsi_PrimaryLocationName>
             </TAF_TAP_LocationIdent>
-            <TAF_TAP_LocationName language="de" text="Prilly Malley"/>
 
             <TAF_TAP_Location_NSP>
                 <teltsi_Company>0085</teltsi_Company>
@@ -79,6 +78,12 @@
 
     <SP_ContextInformation>
 
+        <ContactList startEndQualifier="StartsEnds" startLocation="0" endLocation="0">
+            <Contact mainContact="true">
+                <OtherContactType contactIdentifier="1301"/>
+            </Contact>
+        </ContactList>
+
         <KilometreReferencePoint location="0">
             <KM_Reference kmRef="2.3"/>
         </KilometreReferencePoint>
@@ -94,9 +99,6 @@
         <KilometreReferencePoint location="1600">
             <KM_Reference kmRef="0.7"/>
         </KilometreReferencePoint>
-
-        <DecisiveGradientArea startEndQualifier="StartsEnds" startLocation="0" endLocation="0" gradientValue="10.0" gradientDirection="Downhill"
-                              directionOfApplicationOnSP="Nominal"/>
 
     </SP_ContextInformation>
 

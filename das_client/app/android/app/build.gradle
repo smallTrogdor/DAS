@@ -1,0 +1,106 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+android {
+    namespace "ch.sbb.das"
+    compileSdk flutter.compileSdkVersion
+    //ndkVersion flutter.ndkVersion
+    ndkVersion "27.0.12077973"
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    defaultConfig {
+        applicationId "ch.sbb.das.client"
+        minSdkVersion flutter.minSdkVersion
+        targetSdkVersion flutter.targetSdkVersion
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders += [
+                'waraPackageName': 'ch.sbb.tms.iad.shas_mobile'
+        ]
+    }
+
+    flavorDimensions = ['env']
+
+    productFlavors {
+        dev {
+            dimension 'env'
+            applicationIdSuffix '.dev'
+            manifestPlaceholders += [
+                    'appAuthRedirectScheme': 'ch.sbb.das'
+            ]
+        }
+        inte {
+            dimension 'env'
+            applicationIdSuffix '.inte'
+            manifestPlaceholders += [
+                    'appAuthRedirectScheme': 'ch.sbb.das'
+            ]
+        }
+        prod {
+            dimension 'env'
+            manifestPlaceholders += [
+                    'appAuthRedirectScheme': 'ch.sbb.das'
+            ]
+        }
+    }
+
+    signingConfigs {
+        release {
+            storeFile = file(System.getenv("ANDROID_KEYSTORE") ?: ANDROID_KEYSTORE)
+            storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD") ?: ANDROID_KEYSTORE_PASSWORD
+            keyAlias System.getenv("ANDROID_KEY_ALIAS") ?: ANDROID_KEY_ALIAS
+            keyPassword System.getenv("ANDROID_KEY_PASSWORD") ?: ANDROID_KEY_PASSWORD
+        }
+    }
+
+    buildTypes {
+        debug
+        release {
+            signingConfig signingConfigs.release
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}

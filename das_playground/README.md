@@ -1,9 +1,11 @@
 > [!NOTE]  
-> This playground webapp is for testing and demo purpose only
+> This webapp is for testing and demo purpose only
 
-# das_playground
+# DAS-Playground
 
-Observing and testing SFERA messages.
+Observing and testing SFERA messages:
+* Utility for UX-Tests and Debug-Help
+* UI for [SFERA-Mock](../sfera_mock) queue-contents
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.2.
 

@@ -14,9 +14,9 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     outputs:
-      das_client--release_created: ${{ steps.release.outputs.das_client--release_created }}
-      das_client--version: ${{ steps.release.outputs.das_client--version }}
-      das_client--tag_name: ${{ steps.release.outputs.das_client--tag_name }}
+      das_client--release_created: ${{ steps.release.outputs['das_client/app--release_created'] }}
+      das_client--version: ${{ steps.release.outputs['das_client/app--version'] }}
+      das_client--tag_name: ${{ steps.release.outputs['das_client/app--tag_name'] }}
       sfera_mock--release_created: ${{ steps.release.outputs.sfera_mock--release_created }}
       sfera_mock--version: ${{ steps.release.outputs.sfera_mock--version }}
       sfera_mock--tag_name: ${{ steps.release.outputs.sfera_mock--tag_name }}
@@ -36,12 +36,14 @@ jobs:
   das_client-release-android:
     needs: release-please
     if: needs.release-please.outputs.das_client--release_created
-    uses: ./.github/workflows/release-das-client-android.yml
+    uses: ./.github/workflows/client_release_android.yml
+    secrets: inherit
 
   das_client-release-ios:
     needs: release-please
     if: needs.release-please.outputs.das_client--release_created
-    uses: ./.github/workflows/release-das-client-ios.yml
+    uses: ./.github/workflows/client_release_ios.yml
+    secrets: inherit
 
   sfera_mock-release:
     needs: release-please
@@ -51,11 +53,30 @@ jobs:
       run:
         working-directory: sfera_mock
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
 
-      - run: echo "Created sfera_mock RELEASE"
-
-
+      - name: Login to GitHub Container Registry
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
+      - name: Create container image
+        env:
+          IMAGE_ID: ghcr.io/${{ github.repository }}/sfera-mock
+          VERSION: ${{ needs.release-please.outputs.sfera_mock--version }}
+        run: |
+          # Convert to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[:upper:]' '[:lower:]')
+          
+          mvn spring-boot:build-image \
+            -Dmaven.test.skip=true \
+            -Dspring-boot.build-image.imageName=$IMAGE_ID:$VERSION
+          
+          docker push $IMAGE_ID:$VERSION
+          docker tag $IMAGE_ID:$VERSION $IMAGE_ID:latest
+          docker push $IMAGE_ID:latest
   das_backend-release:
     needs: release-please
     if: needs.release-please.outputs.das_backend--release_created
@@ -64,11 +85,37 @@ jobs:
       run:
         working-directory: das_backend
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
 
-      - run: echo "Created das_backend RELEASE"
+      - name: Login to GitHub Container Registry
+        run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io --username ${{ github.actor }} --password-stdin
+      - name: Create container image
+        env:
+          IMAGE_ID: ghcr.io/${{ github.repository }}/backend
+          VERSION: ${{ needs.release-please.outputs.das_backend--version }}
+          ZIS_SR_URL: ${{ secrets.ZIS_SR_URL }}
+          ZIS_SR_API_KEY: ${{ secrets.ZIS_SR_API_KEY }}
+          ZIS_SR_API_SECRET: ${{ secrets.ZIS_SR_API_SECRET }}
+        run: |
+          # Convert to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[:upper:]' '[:lower:]')
 
+          mvn spring-boot:build-image \
+            -Dtest=ch.sbb.backend.ApiExtractionTest \
+            -Dspring-boot.build-image.imageName=$IMAGE_ID:$VERSION
 
+          docker push $IMAGE_ID:$VERSION
+          docker tag $IMAGE_ID:$VERSION $IMAGE_ID:latest
+          docker push $IMAGE_ID:latest
+      - name: Upload Release Artifact
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload ${{ needs.release-please.outputs.das_backend--tag_name }} ./src/main/resources/api/api-specification.yaml
   das_playground-release:
     needs: release-please
     if: needs.release-please.outputs.das_playground--release_created
@@ -77,6 +124,27 @@ jobs:
       run:
         working-directory: das_playground
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: 'das_playground/.nvmrc'
+          cache: 'npm'
+          cache-dependency-path: 'das_playground/package-lock.json'
+      - run: npm clean-install
+      - run: npm run build:ngssc
+      - name: Login to GitHub Container Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u $ --password-stdin
+      - name: Create container image
+        env:
+          IMAGE_ID: ghcr.io/${{ github.repository }}/webapp
+          VERSION: ${{ needs.release-please.outputs.das_playground--version }}
+          DOCKER_BUILDKIT: 1
+        run: |
+          # Convert to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[:upper:]' '[:lower:]')
 
-      - run: echo "Created das_playground RELEASE"
+          docker build -t $IMAGE_ID:$VERSION .
+          docker push $IMAGE_ID:$VERSION
+          docker tag $IMAGE_ID:$VERSION $IMAGE_ID:latest
+          docker push $IMAGE_ID:latest
+          

@@ -1,0 +1,16 @@
+enum OrderPriority {
+  shuntingMovementStart,
+  cabSignalingStart,
+  group,
+  balise,
+  servicePoint,
+  signal,
+  baseData,
+  uncodedOperationalIndication,
+  lineFootNotes,
+  opFootNote,
+  curve,
+  trackFootNote,
+  cabSignalingEnd,
+  shuntingMovementEnd,
+}

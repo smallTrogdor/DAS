@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<SegmentProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../SFERA_v3.00.xsd" SP_ID="T9999_1" SP_VersionMajor="2"
-                SP_VersionMinor="1" SP_Length="1000" SP_Status="Valid">
+<SegmentProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../SFERA_v3.00.xsd" SP_ID="T9999_1" SP_VersionMajor="6"
+                SP_VersionMinor="0" SP_Length="1000" SP_Status="Valid">
     <SP_Zone>
         <IM_ID>0085</IM_ID>
     </SP_Zone>
@@ -57,8 +57,6 @@
                 <teltsi_LocationPrimaryCode>9991</teltsi_LocationPrimaryCode>
                 <teltsi_PrimaryLocationName>Bahnhof A</teltsi_PrimaryLocationName>
             </TAF_TAP_LocationIdent>
-            <!--todo: remove-->
-            <TAF_TAP_LocationName language="de" text="Bahnhof A"/>
             <TAF_TAP_Location_NSP>
                 <teltsi_Company>0085</teltsi_Company>
                 <NSP_GroupName>newLineSpeed</NSP_GroupName>
@@ -83,13 +81,10 @@
                     &lt;/entries&gt;
                 "/>
             </TAF_TAP_Location_NSP>
-
-            <!--            gleisspezifische Geschwindigkeiten	-->
             <TAF_TAP_Location_NSP>
                 <teltsi_Company>0085</teltsi_Company>
-                <NSP_GroupName>stationProperty_00000</NSP_GroupName>
-                <NetworkSpecificParameter name="stationPropertySpeed_R150" value="30-40"/>
-                <NetworkSpecificParameter name="text" value="&lt;b&gt;31&lt;/b&gt;"/>
+                <NSP_GroupName>routeTableData</NSP_GroupName>
+                <NetworkSpecificParameter name="betweenBrackets" value="true"/>
             </TAF_TAP_Location_NSP>
         </TAF_TAP_Location>
 

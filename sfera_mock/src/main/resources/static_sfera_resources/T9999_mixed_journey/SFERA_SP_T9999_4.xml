@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<SegmentProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../SFERA_v3.00.xsd" SP_ID="T9999_4" SP_VersionMajor="2"
-                SP_VersionMinor="1" SP_Length="1000" SP_Status="Valid">
+<SegmentProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../SFERA_v3.00.xsd" SP_ID="T9999_4" SP_VersionMajor="4"
+                SP_VersionMinor="0" SP_Length="1000" SP_Status="Valid">
     <SP_Zone>
         <IM_ID>0085</IM_ID>
     </SP_Zone>
@@ -65,8 +65,6 @@
                 <teltsi_LocationPrimaryCode>9994</teltsi_LocationPrimaryCode>
                 <teltsi_PrimaryLocationName>Klammerbahnhof D</teltsi_PrimaryLocationName>
             </TAF_TAP_LocationIdent>
-            <!--todo: remove-->
-            <TAF_TAP_LocationName language="de" text="Klammerbahnhof D"/>
             <TAF_TAP_Location_NSP>
                 <teltsi_Company>0085</teltsi_Company>
                 <NSP_GroupName>bracketStation</NSP_GroupName>
@@ -91,6 +89,20 @@
     </SP_Areas>
 
     <SP_ContextInformation>
+        <ContactList startEndQualifier="StartsEnds" startLocation="700" endLocation="700">
+            <Contact mainContact="true">
+                <OtherContactType contactIdentifier="1304"/>
+            </Contact>
+            <Contact mainContact="false" contactRole="Richtung Süd: Fahrdienstleiter">
+                <OtherContactType contactIdentifier="1302"/>
+            </Contact>
+            <Contact mainContact="false" contactRole="Richtung Nord: Fahrdienstleiter">
+                <OtherContactType contactIdentifier="1304"/>
+            </Contact>
+            <Contact mainContact="false" contactRole="Rangierbahnhof: Fahrdienstleiter Stellwerk 3">
+                <OtherContactType contactIdentifier="1310"/>
+            </Contact>
+        </ContactList>
         <KilometreReferencePoint location="500">
             <KM_Reference kmRef="3.5"/>
         </KilometreReferencePoint>

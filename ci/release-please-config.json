@@ -2,10 +2,10 @@
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
   "separate-pull-requests": true,
   "packages": {
-    "das_client": {
+    "das_client/app": {
+      "package-name": "das_client",
       "release-type": "dart",
-      "bump-minor-pre-major": true,
-      "extra-label": "release:das_client"
+      "bump-minor-pre-major": true
     },
     "das_backend": {
       "release-type": "maven",

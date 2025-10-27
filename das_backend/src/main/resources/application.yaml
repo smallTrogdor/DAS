@@ -1,7 +1,6 @@
 info:
   app:
     version: '@project.version@'
-
 spring:
   profiles:
     active: ${STAGE:local}
@@ -14,6 +13,16 @@ spring:
           jwk-set-uri: https://login.microsoftonline.com/2cda5d11-f0ac-46b3-967d-af1b2e1bd01a/discovery/v2.0/keys
           issuer-uri: https://login.microsoftonline.com/2cda5d11-f0ac-46b3-967d-af1b2e1bd01a/v2.0
       authorizationUrl: https://login.microsoftonline.com/common/oauth2/v2.0
+      client:
+        registration:
+          azure:
+            client-id: ${SFERA_OAUTH_CLIENTID}
+            client-secret: ${SFERA_OAUTH_SECRET}
+            authorization-grant-type: client_credentials
+            scope: ${SFERA_OAUTH_SCOPE}
+        provider:
+          azure:
+            token-uri: https://login.microsoftonline.com/2cda5d11-f0ac-46b3-967d-af1b2e1bd01a/oauth2/v2.0/token
   jackson:
     mapper:
       accept-case-insensitive-enums: true
@@ -24,6 +33,37 @@ spring:
     url: ${DB_URL}
   flyway:
     baseline-on-migrate: true
+  kafka:
+    consumer:
+      bootstrap-servers: ${ZIS_BOOTSTRAP_URL}
+      key-deserializer: io.confluent.kafka.serializers.json.KafkaJsonSchemaDeserializer
+      value-deserializer: io.confluent.kafka.serializers.json.KafkaJsonSchemaDeserializer
+      auto-offset-reset: latest
+      group-id: ${ZIS_GROUP_ID}
+      properties:
+        schema.registry.url: ${ZIS_SR_URL}
+        json:
+          value.type: ch.sbb.zis.trainformation.api.model.DailyFormationTrain
+          key.type: ch.sbb.zis.trainformation.api.model.DailyFormationTrainKey
+          fail.invalid.schema: true
+    jaas:
+      enabled: true
+      login-module: org.apache.kafka.common.security.plain.PlainLoginModule
+      options:
+        username: ${ZIS_API_KEY}
+        password: ${ZIS_API_SECRET}
+    security:
+      protocol: SASL_SSL
+    properties:
+      sasl.mechanism: PLAIN
+      connections.max.idle.ms: 340000
+      basic.auth:
+        credentials.source: USER_INFO
+        user.info: ${ZIS_SR_API_KEY}:${ZIS_SR_API_SECRET}
+      schema.registry.url: ${ZIS_SR_URL}
+  jpa:
+    hibernate:
+      ddl-auto: validate
 management:
   endpoint:
     health:
@@ -32,28 +72,50 @@ management:
 springdoc:
   swagger-ui:
     oauth:
-      clientId: 6025180f-123b-4f2f-9703-16e08fc221f0
+      clientId: ${AUTH_SWAGGER_CLIENT_ID}
       use-pkce-with-authorization-code-grant: true
 auth:
   audience:
-    service-name: 6025180f-123b-4f2f-9703-16e08fc221f0
+    service-name: ${AUTH_SERVICE_NAME}
   tenants:
     - name: sbb
       id: 2cda5d11-f0ac-46b3-967d-af1b2e1bd01a
       issuer-uri: https://login.microsoftonline.com/2cda5d11-f0ac-46b3-967d-af1b2e1bd01a/v2.0
       jwk-set-uri: https://login.microsoftonline.com/2cda5d11-f0ac-46b3-967d-af1b2e1bd01a/discovery/v2.0/keys
-      log-destination: splunk
     - name: sob
       id: d653d01f-17a4-48a1-9aab-b780b61b4273
       issuer-uri: https://login.microsoftonline.com/d653d01f-17a4-48a1-9aab-b780b61b4273/v2.0
       jwk-set-uri: https://login.microsoftonline.com/d653d01f-17a4-48a1-9aab-b780b61b4273/discovery/v2.0/keys
-      log-destination: splunk
     - name: bls
       id: a64ce5df-4ad8-40b9-91ee-54bac2bb8326
       issuer-uri: https://login.microsoftonline.com/a64ce5df-4ad8-40b9-91ee-54bac2bb8326/v2.0
       jwk-set-uri: https://login.microsoftonline.com/a64ce5df-4ad8-40b9-91ee-54bac2bb8326/discovery/v2.0/keys
-      log-destination: splunk
-
-splunk:
+zis:
+  kafka.topic: ${ZIS_TOPIC}
+  clean-up:
+    cron: 0 0 3 * * ?  # every day at 3am
+    older-than-days: 100
+logging:
   url: ${SPLUNK_HEC_URL}
   token: ${SPLUNK_HEC_TOKEN}
+aws:
+  accessKey: ${AWS_ACCESS_KEY}
+  secretKey: ${AWS_SECRET_KEY}
+  bucketName: ${AWS_BUCKET_NAME}
+
+sfera:
+  company-code: '1085'
+  sfera-version: '3.00'
+  source-device: 'BACKEND'
+  recipient: '0085'
+  broker-url: ${SFERA_BROKER_URL}
+  clientId: ${SFERA_BROKER_CLIENTID}
+  oauth-profile: ${SFERA_BROKER_OAUTH_PROFILE}
+  topic-prefix: ${SFERA_BROKER_TOPIC_PREFIX}
+
+preload:
+  fetch-cron: '-'
+  bucket:
+    bucketUrl: ${PRELOAD_BUCKET_URL}
+    accessKey: ${PRELOAD_BUCKET_KEY}
+    accessSecret: ${PRELOAD_BUCKET_SECRET}

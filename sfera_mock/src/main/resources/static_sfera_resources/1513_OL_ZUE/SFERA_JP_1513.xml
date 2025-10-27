@@ -1,15 +1,6 @@
 <?xml version="1.0" ?>
-<!-- Out of Scope
-- amount of SPs (would be way more)
-- real signal_ID_Physical not known
-- hidden locations (routeTableDataRelevant: true = ist in RADN sichtbar, false = ist in RADN unsichtbar, unlisted = ist nur in Operational Plan)
-- VPro (structure will change with 3.0)
-- local regulations
-- events (one example included)
-- some renamings and missing attributes which will be added with 3.0
--->
 
-<JourneyProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" JP_Status="Valid" JP_Version="3" xsi:noNamespaceSchemaLocation="../../SFERA_v3.00.xsd">
+<JourneyProfile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" JP_Status="Valid" JP_Version="4" xsi:noNamespaceSchemaLocation="../../SFERA_v3.00.xsd">
     <TrainIdentification>
         <OTN_ID>
             <teltsi_Company>1285</teltsi_Company>
@@ -19,7 +10,7 @@
     </TrainIdentification>
 
     <!-- SegmentProfileList neu SegmentProfileReference mit JP_ContextInformation -->
-    <SegmentProfileReference SP_ID="1513_1_Olten" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_1_Olten" SP_VersionMajor="3" SP_VersionMinor="2" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -42,9 +33,19 @@
             <TC_RU_ID>1285</TC_RU_ID>
         </TrainCharacteristicsRef>
 
+        <JP_ContextInformation>
+            <!-- VPro for OL -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="120"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
+
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_2_Dulliken" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_2_Dulliken" SP_VersionMajor="3" SP_VersionMinor="3" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -55,9 +56,19 @@
                 <TP_ID_Reference TP_ID="Dulliken"/>
             </TimingPointReference>
         </TimingPointConstraints>
+
+        <JP_ContextInformation>
+            <!-- VPro for Dulliken -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="115"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_3_Daeniken" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_3_Daeniken" SP_VersionMajor="3" SP_VersionMinor="3" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -68,9 +79,19 @@
                 <TP_ID_Reference TP_ID="Daeniken"/>
             </TimingPointReference>
         </TimingPointConstraints>
+
+        <JP_ContextInformation>
+            <!-- VPro for Daeniken -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="120"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_4_Schoenenwerd" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_4_Schoenenwerd" SP_VersionMajor="3" SP_VersionMinor="3" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -80,9 +101,19 @@
                 <TP_ID_Reference TP_ID="Schoenenwerd"/>
             </TimingPointReference>
         </TimingPointConstraints>
+
+        <JP_ContextInformation>
+            <!-- VPro for Schoenenwerd -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="135"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_5_Woeschnau" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_5_Woeschnau" SP_VersionMajor="3" SP_VersionMinor="3" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -92,9 +123,19 @@
                 <TP_ID_Reference TP_ID="Woeschnau"/>
             </TimingPointReference>
         </TimingPointConstraints>
+
+        <JP_ContextInformation>
+            <!-- VPro for Woeschnau -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="145"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_6_Aarau" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_6_Aarau" SP_VersionMajor="3" SP_VersionMinor="5" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -110,9 +151,27 @@
                 <TP_ID_Reference TP_ID="Aarau_GB"/>
             </TimingPointReference>
         </TimingPointConstraints>
+
+        <JP_ContextInformation>
+            <!-- VPro for Aarau -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="155"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+            <!-- VPro for AarauGB -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="155"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="700" endLocation="700"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
+
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_7_Rupperswil" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_7_Rupperswil" SP_VersionMajor="3" SP_VersionMinor="3" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -122,9 +181,19 @@
                 <TP_ID_Reference TP_ID="Rupperswil"/>
             </TimingPointReference>
         </TimingPointConstraints>
+
+        <JP_ContextInformation>
+            <!-- VPro for Rupperswil -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="135"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_8_Lenzburg" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_8_Lenzburg" SP_VersionMajor="3" SP_VersionMinor="3" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -134,9 +203,19 @@
                 <TP_ID_Reference TP_ID="Lenzburg"/>
             </TimingPointReference>
         </TimingPointConstraints>
+
+        <JP_ContextInformation>
+            <!-- VPro for Lenzburg -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="125"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_9_Gexi" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_9_Gexi" SP_VersionMajor="3" SP_VersionMinor="2" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -146,9 +225,19 @@
                 <TP_ID_Reference TP_ID="Gexi"/>
             </TimingPointReference>
         </TimingPointConstraints>
+
+        <JP_ContextInformation>
+            <!-- VPro for Gexi -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="125"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_10_Othmarsingen" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_10_Othmarsingen" SP_VersionMajor="3" SP_VersionMinor="3" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -158,9 +247,19 @@
                 <TP_ID_Reference TP_ID="Othmarsingen"/>
             </TimingPointReference>
         </TimingPointConstraints>
+
+        <JP_ContextInformation>
+            <!-- VPro for Othmarsingen -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="130"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_11_Maegenwil" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_11_Maegenwil" SP_VersionMajor="3" SP_VersionMinor="3" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -170,9 +269,19 @@
                 <TP_ID_Reference TP_ID="Maegenwil"/>
             </TimingPointReference>
         </TimingPointConstraints>
+
+        <JP_ContextInformation>
+            <!-- VPro for Maegenwil -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="125"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_12_Mellingen" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_12_Mellingen" SP_VersionMajor="3" SP_VersionMinor="2" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -182,9 +291,18 @@
                 <TP_ID_Reference TP_ID="Mellingen"/>
             </TimingPointReference>
         </TimingPointConstraints>
+        <JP_ContextInformation>
+            <!-- VPro for Mellingen -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="125"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_13_Mellingen_Heitersberg" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_13_Mellingen_Heitersberg" SP_VersionMajor="3" SP_VersionMinor="3" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -194,9 +312,18 @@
                 <TP_ID_Reference TP_ID="Mellingen_Heitersberg"/>
             </TimingPointReference>
         </TimingPointConstraints>
+        <JP_ContextInformation>
+            <!-- VPro for Mellingen_Heitersberg -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="125"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_14_Killwangen_Spreitenbach" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_14_Killwangen_Spreitenbach" SP_VersionMajor="3" SP_VersionMinor="2" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -206,9 +333,19 @@
                 <TP_ID_Reference TP_ID="Killwangen_Spreitenbach"/>
             </TimingPointReference>
         </TimingPointConstraints>
+
+        <JP_ContextInformation>
+            <!-- VPro for Killwangen_Spreitenbach -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="135"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_15_Dietikon" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_15_Dietikon" SP_VersionMajor="3" SP_VersionMinor="3" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -218,9 +355,18 @@
                 <TP_ID_Reference TP_ID="Dietikon"/>
             </TimingPointReference>
         </TimingPointConstraints>
+        <JP_ContextInformation>
+            <!-- VPro for Dietikon -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="130"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_16_Glanzenberg" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_16_Glanzenberg" SP_VersionMajor="3" SP_VersionMinor="3" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -230,9 +376,18 @@
                 <TP_ID_Reference TP_ID="Glanzenberg"/>
             </TimingPointReference>
         </TimingPointConstraints>
+        <JP_ContextInformation>
+            <!-- VPro for Glanzenberg -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="130"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_17_Schlieren" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_17_Schlieren" SP_VersionMajor="3" SP_VersionMinor="3" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -242,9 +397,18 @@
                 <TP_ID_Reference TP_ID="Schlieren"/>
             </TimingPointReference>
         </TimingPointConstraints>
+        <JP_ContextInformation>
+            <!-- VPro for Schlieren -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="130"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_18_Altstetten" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_18_Altstetten" SP_VersionMajor="3" SP_VersionMinor="2" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -254,9 +418,19 @@
                 <TP_ID_Reference TP_ID="Altstetten"/>
             </TimingPointReference>
         </TimingPointConstraints>
+
+        <JP_ContextInformation>
+            <!-- VPro for Altstetten -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="130"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_19_Hardbruecke" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_19_Hardbruecke" SP_VersionMajor="3" SP_VersionMinor="3" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -266,9 +440,19 @@
                 <TP_ID_Reference TP_ID="Hardbruecke"/>
             </TimingPointReference>
         </TimingPointConstraints>
+
+        <JP_ContextInformation>
+            <!-- VPro for Hardbruecke -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="135"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
-    <SegmentProfileReference SP_ID="1513_20_Zuerich_HB" SP_VersionMajor="3" SP_VersionMinor="1" SP_Direction="Nominal">
+    <SegmentProfileReference SP_ID="1513_20_Zuerich_HB" SP_VersionMajor="3" SP_VersionMinor="3" SP_Direction="Nominal">
         <SP_Zone>
             <IM_ID>1285</IM_ID>
         </SP_Zone>
@@ -279,6 +463,15 @@
                 <TP_ID_Reference TP_ID="Zuerich_HB"/>
             </TimingPointReference>
         </TimingPointConstraints>
+        <JP_ContextInformation>
+            <!-- VPro for Zuerich_HB -->
+            <JP_ContextInformation_NSPs>
+                <teltsi_Company>0085</teltsi_Company>
+                <NSP_GroupName>VProSpeed</NSP_GroupName>
+                <NetworkSpecificParameter name="newSpeed" value="135"/>
+                <JP_ContextInformation_NSP_Constraints startEndQualifier="StartsEnds" startLocation="0" endLocation="0"/>
+            </JP_ContextInformation_NSPs>
+        </JP_ContextInformation>
     </SegmentProfileReference>
 
 </JourneyProfile>

@@ -1,5 +1,9 @@
 include: package:flutter_lints/flutter.yaml
 
+formatter:
+  page_width: 120
+  trailing_commas: preserve
+
 linter:
   rules:
     always_use_package_imports: true
@@ -9,11 +13,9 @@ linter:
     prefer_final_fields: true
     always_put_required_named_parameters_first: true
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
 analyzer:
-  plugins:
-    - custom_lint
   exclude:
-    - lib/**.g.dart
-    - test/**.mocks.dart
+    - '**.mocks.dart'
+    - '**.fake.dart'
+    - '**.g.dart'
+    - '**.gr.dart'

@@ -1,0 +1,19 @@
+import 'package:app/di/di.dart';
+import 'package:app/sound/sound.dart';
+import 'package:app/widgets/assets.dart';
+import 'package:audioplayers/audioplayers.dart';
+
+class WarnAppSound extends Sound {
+  const WarnAppSound();
+
+  static const _volume = 1.0;
+
+  @override
+  Future<void> play() async {
+    await Sound.volumeController.setVolume(_volume);
+    final audioPlayer = DI.get<AudioPlayer>();
+    await audioPlayer.stop();
+    await audioPlayer.setReleaseMode(ReleaseMode.loop);
+    await audioPlayer.play(AssetSource(AppAssets.soundWarnappWarn));
+  }
+}

@@ -1,6 +1,6 @@
-import { Environment } from "./environment.model";
-import { PassedInitialConfig } from "angular-auth-oidc-client";
-import { IMqttServiceOptions } from "ngx-mqtt";
+import {Environment} from "./environment.model";
+import {PassedInitialConfig} from "angular-auth-oidc-client";
+import {IMqttServiceOptions} from "ngx-mqtt";
 
 const backendUrl = 'http://localhost:8080';
 const customTopicPrefix = 'dev/';
@@ -9,8 +9,8 @@ const authConfig: PassedInitialConfig = {
   config: {
     authority: 'https://login.microsoftonline.com/common/v2.0',
     redirectUrl: window.location.origin,
-    clientId: '6025180f-123b-4f2f-9703-16e08fc221f0',
-    scope: 'openid profile email offline_access 6025180f-123b-4f2f-9703-16e08fc221f0/.default',
+    clientId: 'ded405bf-22e0-478e-9963-2467ea1fd539',
+    scope: 'openid profile email offline_access api://8f16d52b-c6df-4a94-a132-da4956579a48/.default',
     silentRenew: true,
     useRefreshToken: true,
     maxIdTokenIatOffsetAllowedInSeconds: 600,
@@ -20,6 +20,7 @@ const authConfig: PassedInitialConfig = {
     customParamsAuthRequest: {
       prompt: 'select_account',
     },
+    strictIssuerValidationOnWellKnownRetrievalOff: true
   }
 }
 
@@ -37,7 +38,7 @@ const mqttServiceOptions: IMqttServiceOptions = {
 export const environment: Environment = {
   production: false,
   label: 'dev',
-  oauthProfile: 'azureAd',
+  oauthProfile: 'azureAdDev',
   customTopicPrefix,
   backendUrl,
   authConfig,

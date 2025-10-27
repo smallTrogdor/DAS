@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { SbbFormFieldModule } from "@sbb-esta/angular/form-field";
 import { SbbInputModule } from "@sbb-esta/angular/input";
@@ -56,13 +56,11 @@ export class SferaObserverComponent implements OnInit, OnDestroy {
   b2gSubscription?: Subscription;
   eventSubscription?: Subscription;
 
+  protected mqService = inject(MqService);
   protected readonly MqttConnectionState = MqttConnectionState;
-
-  constructor(private oidcSecurityService: OidcSecurityService,
-              protected mqService: MqService,
-              private sessionsService: SessionsService,
-              private route: ActivatedRoute) {
-  }
+  private oidcSecurityService = inject(OidcSecurityService);
+  private sessionsService = inject(SessionsService);
+  private route = inject(ActivatedRoute);
 
   ngOnInit() {
     const params = this.route.snapshot.paramMap;
@@ -91,14 +89,14 @@ export class SferaObserverComponent implements OnInit, OnDestroy {
 
     this.g2bSubscription = this.mqService.observe(this.g2bTopic)
       .subscribe(value => {
-        this.addData(value.payload.toString(), 'g2b');
+        this.addData(value.payload.toString(), 'g2b', value.length);
       })
     this.b2gSubscription = this.mqService.observe(this.b2gTopic)
       .subscribe(value => {
-        this.addData(value.payload.toString(), 'b2g');
+        this.addData(value.payload.toString(), 'b2g', value.length);
       })
     this.eventSubscription = this.mqService.observe(this.eventTopic).subscribe(value => {
-      this.addData(value.payload.toString(), 'event');
+      this.addData(value.payload.toString(), 'event', value.length);
     })
   }
 
@@ -115,14 +113,16 @@ export class SferaObserverComponent implements OnInit, OnDestroy {
     this.disconnect();
   }
 
-  addData(xml: string, topic: string) {
+  addData(xml: string, topic: string, length?: number) {
     const document = this.toDom(xml);
     const row = {
       direction: topic == "b2g" ? "↑" : "↓",
       topic: topic,
       type: this.getType(document) || '',
       info: this.getInfo(document) || '',
-      message: xml
+      message: xml,
+      size: length,
+      timestamp: new Date()
     }
 
     this.data.push(row);

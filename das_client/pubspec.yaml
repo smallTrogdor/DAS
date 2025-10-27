@@ -1,111 +1,75 @@
 name: das_client
+publish_to: none
 description: "DAS (Driver Advisory System) is a mobile application that provides all the required journey data to the train driver."
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 0.17.2+59
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: ^3.9.0
 
-dependencies:
-  flutter:
-    sdk: flutter
-  flutter_localizations:
-    sdk: flutter
-
-  sbb_oidc:
-    git:
-      url: https://github.com/SchweizerischeBundesbahnen/flutter-oidc.git
-      path: sbb_oidc
-      ref: 3.4.0
-
-  # https://pub.dev/packages/sbb_design_system_mobile
-  # will revert to pub dev once promotion box changes are released
-  sbb_design_system_mobile:
-    git:
-      url: https://github.com/SchweizerischeBundesbahnen/design_system_flutter.git
-      ref: feature/promotion-box-improvement
-
-  # https://pub.dev/packages/collection
-  collection: ^1.19.0
-  # https://pub.dev/packages/meta
-  meta: ^1.15.0
-  # https://pub.dev/packages/get_it
-  get_it: ^8.0.0
-  # https://pub.dev/packages/auto_route
-  auto_route: ^9.2.2
-  # https://pub.dev/packages/flutter_bloc
-  flutter_bloc: ^9.0.0
-  # https://pub.dev/packages/fimber
-  fimber: ^0.7.0
-  # https://pub.dev/packages/intl
-  intl: ^0.19.0
-  # https://pub.dev/packages/mqtt_client
-  mqtt_client: ^10.5.1
-  # https://pub.dev/packages/xml
-  xml: ^6.5.0
-  # https://pub.dev/packages/http
-  http: ^1.2.1
-  # https://pub.dev/packages/device_info_plus
-  device_info_plus: ^11.0.0
-  # https://pub.dev/packages/android_id
-  android_id: ^0.4.0
-  # https://pub.dev/packages/uuid
-  uuid: ^4.4.0
-  # https://pub.dev/packages/rxdart
-  rxdart: ^0.28.0
-  # https://pub.dev/packages/isar
-  isar: ^4.0.0-dev.14
-  # https://pub.dev/packages/isar_flutter_libs
-  isar_flutter_libs: ^4.0.0-dev.14
-  # https://pub.dev/packages/path_provider
-  path_provider: ^2.1.3
-  # https://pub.dev/packages/package_info_plus
-  package_info_plus: ^8.0.3
-  # https://pub.dev/packages/synchronized
-  synchronized: ^3.3.0
-  # https://pub.dev/packages/flutter_svg
-  flutter_svg: ^2.0.14
-  # https://pub.dev/packages/iso_duration
-  iso_duration: ^0.1.1
-  # https://pub.dev/packages/battery_plus
-  battery_plus: ^6.2.1
-  # https://pub.dev/packages/audioplayers
-  audioplayers: 5.2.1
-  # https://pub.dev/packages/volume_controller
-  volume_controller: ^3.3.1
-  # https://pub.dev/packages/provider
-  provider: ^6.1.2
+workspace:
+  - app
+  - auth
+  - http_x
+  - mqtt
+  - logger
+  - sfera
+  - warnapp
+  - settings
+  - connectivity_x
+  - local_regulations
 
 dev_dependencies:
-  integration_test:
-    sdk: flutter
-  flutter_test:
-    sdk: flutter
+  melos: ^7.2.0
 
-  build_runner: ^2.4.9
-  auto_route_generator: ^9.0.0
-  mockito: ^5.4.4
+# Melos Configuration
 
-  path_provider_platform_interface: any
-  plugin_platform_interface: any
-  flutter_lints: ^5.0.0
-  
-  custom_lint:
-  das_custom_lints:
-    path: ./das_custom_lints
+melos:
+  scripts:
+    clean:das:
+      description: Run cleanup of das client files
+      run: flutter clean
+      exec:
+        concurrency: 4
+      packageFilters:
+        flutter: true
 
-  flutter_launcher_icons: ^0.14.0
+    generate:
+      run: |
+        melos run generate:build_runner --no-select &&
+        melos run generate:intl
 
-flutter:
-  generate: true
-  uses-material-design: true
-  assets:
-    - assets/
-    - assets/icons/
-    - assets/others/
-    - assets/fonts/
-    - assets/sounds/
-  fonts:
-    - family: DasIcons
-      fonts:
-        - asset: assets/fonts/DasIcons.ttf
+    generate:build_runner:
+      run: dart run build_runner build --delete-conflicting-outputs
+      description: Run build_runner in all components
+      exec:
+        orderDependents: true
+      packageFilters:
+        dependsOn: "build_runner"
+
+    generate:intl:
+      run: flutter gen-l10n
+      description: Run generation of internationalization files
+      exec:
+        concurrency: 1
+      packageFilters:
+        dirExists: l10n
+
+    test:
+      run: flutter test --no-pub
+      description: Run tests in components with test dir
+      exec:
+        failFast: false
+      packageFilters:
+        dirExists: test
+
+    coverage:
+      run: flutter test --coverage --no-pub
+      description: Run tests with coverage in components with test dir
+      exec:
+        failFast: false
+      packageFilters:
+        dirExists: test
+
+  command:
+    clean:
+      hooks:
+        post: melos run clean:das --no-select
