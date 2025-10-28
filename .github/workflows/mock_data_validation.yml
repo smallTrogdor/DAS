@@ -11,8 +11,8 @@ concurrency:
 on:
   pull_request:
     paths:
-      - 'sfera_mock/src/main/resources/static_sfera_resources/**'
-      - 'das_client/sfera/test_resources/**'
+      - 'sfera_mock/src/main/resources/static_sfera_resources'
+      - 'das_client/sfera/test_resources'
     branches: [ "main" ]
 
 jobs:
@@ -29,6 +29,15 @@ jobs:
 
       - name: Get dependencies
         run: flutter pub get
+        
+      - name: Setup melos
+        uses: bluefireteam/melos-action@v3
+        with:
+          melos-version: '^6.3.0'
+          run-bootstrap: 'false'
+
+      - name: Generate sources
+        run: melos generate
 
       - name: Test mock data
         run: flutter test --tags sfera-mock-data-validator
