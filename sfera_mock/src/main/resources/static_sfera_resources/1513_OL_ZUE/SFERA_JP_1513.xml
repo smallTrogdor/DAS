@@ -29,7 +29,7 @@
         </TemporaryConstraints>
         -->
 
-        <TrainCharacteristicsRef TC_ID="1513_1" TC_VersionMajor="1" TC_VersionMinor="0" location="0">
+        <TrainCharacteristicsRef TC_ID="1513_1" TC_VersionMajor="2" TC_VersionMinor="0" location="0">
             <TC_RU_ID>1285</TC_RU_ID>
         </TrainCharacteristicsRef>
 
