@@ -1,22 +1,13 @@
 import 'dart:io';
 
-import 'package:collection/collection.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:sfera/component.dart';
 import 'package:sfera/src/data/dto/g2b_event_payload_dto.dart';
 import 'package:sfera/src/data/dto/journey_profile_dto.dart';
-import 'package:sfera/src/data/dto/related_train_information_dto.dart';
 import 'package:sfera/src/data/dto/segment_profile_dto.dart';
 import 'package:sfera/src/data/dto/train_characteristics_dto.dart';
 import 'package:sfera/src/data/mapper/sfera_model_mapper.dart';
 
-class TestJourney {
-  const TestJourney({required this.journey, required this.name, this.eventName});
-
-  final Journey journey;
-  final String name;
-  final String? eventName;
-}
+import 'test_journey.dart';
 
 /// Uses [SferaReplyParser] and [SferaModelMapper] to parse journeys from static resources in directories
 /// to a [TestJourney] with JOURNEY_NAME as name field.
@@ -115,31 +106,4 @@ class TestJourneyLoader {
 
     return result;
   }
-}
-
-void main() {
-  const sferaStaticResourcesDirectoryPath = '../../sfera_mock/src/main/resources/static_sfera_resources';
-  final testResourcesDir = Directory(sferaStaticResourcesDirectoryPath);
-
-  test('whenSferaStaticResourcesDirPath_thenShouldFindDirectory', tags: 'sfera-mock-data-validator', () {
-    expect(testResourcesDir.existsSync(), isTrue);
-  });
-
-  group('whenLoadingAllJourneysFromTestResourcesDir_thenShouldAllBeValid', () {
-    for (final testJourney in TestJourneyLoader.fromStaticSferaResources()) {
-      final journeyName = [testJourney.name, testJourney.eventName].join('-');
-      test('whenParsingJourney_${journeyName}_thenShouldBeValid', tags: 'sfera-mock-data-validator', () {
-        expect(testJourney.journey.valid, isTrue);
-      });
-    }
-  });
-
-  group('whenLoadingAllJourneysFromTestResourcesDir_thenShouldAllBeValid', () {
-    for (final testJourney in TestJourneyLoader.fromClientTestResources()) {
-      final journeyName = [testJourney.name, testJourney.eventName].nonNulls.join('-');
-      test('whenParsingJourney_${journeyName}_thenShouldBeValid', tags: 'sfera-mock-data-validator', () {
-        expect(testJourney.journey.valid, isTrue);
-      });
-    }
-  });
 }
